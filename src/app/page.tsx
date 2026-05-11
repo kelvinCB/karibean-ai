@@ -24,7 +24,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-function ProductRow({
+function TrendingRow({
   name,
   tagline,
   url,
@@ -68,6 +68,51 @@ function ProductRow({
   );
 }
 
+function ProductCard({
+  name,
+  tagline,
+  url,
+  logo,
+  pricing,
+  bestFor,
+}: {
+  name: string;
+  tagline: string;
+  url: string;
+  logo: string;
+  pricing: string;
+  bestFor: string;
+}) {
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noreferrer"
+      className="group flex h-full flex-col justify-between rounded-[1.6rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] p-5 transition duration-200 hover:-translate-y-1 hover:border-[#8eb6ff]/40 hover:bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))]"
+    >
+      <div className="space-y-5">
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/90 shadow-sm shadow-black/10">
+              <img src={logo} alt={`${name} logo`} className="h-7 w-7 object-contain" />
+            </div>
+            <div>
+              <h3 className="text-base font-semibold text-white">{name}</h3>
+              <p className="text-sm text-slate-400">{bestFor}</p>
+            </div>
+          </div>
+          <Badge label={pricing} />
+        </div>
+        <p className="text-sm leading-7 text-slate-300">{tagline}</p>
+      </div>
+      <div className="mt-6 flex items-center justify-between text-sm text-[#9bc2ff]">
+        <span>Explorar producto</span>
+        <span className="transition group-hover:translate-x-1">→</span>
+      </div>
+    </a>
+  );
+}
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#06111f] text-white">
@@ -89,7 +134,7 @@ export default function Home() {
             <div className="space-y-6 lg:pl-8">
               <div className="border-l border-[#2a4a73] pl-5">
                 <p className="text-sm leading-7 text-slate-300">
-                  Esto no quiere parecer un dashboard de plantilla. La idea es que se sienta como un marketplace editorial, más curado, más limpio y menos “AI-made”.
+                  El objetivo no es parecer otro dashboard genérico de IA, sino una vitrina curada, clara y con suficiente personalidad para que navegar categorías se sienta útil.
                 </p>
               </div>
               <div className="grid grid-cols-2 gap-4 text-sm text-slate-300">
@@ -120,7 +165,7 @@ export default function Home() {
           <div className="grid gap-6 md:grid-cols-2">
             {trendingProducts.map((product) => (
               <div key={product.id} className="border-t border-white/10 pt-4">
-                <ProductRow {...product} />
+                <TrendingRow {...product} />
               </div>
             ))}
           </div>
@@ -165,9 +210,9 @@ export default function Home() {
                 ) : null}
               </div>
 
-              <div>
+              <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-2">
                 {category.products.map((product) => (
-                  <ProductRow key={product.id} {...product} />
+                  <ProductCard key={product.id} {...product} />
                 ))}
               </div>
             </div>
