@@ -24,7 +24,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-function TrendingRow({
+function TrendingCard({
   name,
   tagline,
   url,
@@ -44,26 +44,27 @@ function TrendingRow({
       href={url}
       target="_blank"
       rel="noreferrer"
-      className="group grid gap-4 border-b border-white/8 py-5 transition first:pt-0 last:border-b-0 last:pb-0 hover:bg-white/[0.02]"
+      className="group flex h-full flex-col justify-between rounded-[1.6rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] p-5 transition duration-200 hover:-translate-y-1 hover:border-[#8eb6ff]/40 hover:bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))]"
     >
-      <div className="flex items-start justify-between gap-4">
-        <div className="flex items-start gap-4">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/90 shadow-sm shadow-black/10">
-            <img src={logo} alt={`${name} logo`} className="h-7 w-7 object-contain" />
-          </div>
-          <div className="space-y-1">
-            <div className="flex flex-wrap items-center gap-3">
-              <h3 className="text-lg font-medium text-white">{name}</h3>
-              <Badge label={pricing} />
+      <div className="space-y-5">
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/90 shadow-sm shadow-black/10">
+              <img src={logo} alt={`${name} logo`} className="h-7 w-7 object-contain" />
             </div>
-            <p className="text-sm text-slate-400">{bestFor}</p>
+            <div>
+              <h3 className="text-base font-semibold text-white">{name}</h3>
+              <p className="text-sm text-slate-400">{bestFor}</p>
+            </div>
           </div>
+          <Badge label={pricing} />
         </div>
-        <span className="hidden text-sm text-[#9bc2ff] transition group-hover:translate-x-1 sm:inline">
-          Visitar →
-        </span>
+        <p className="text-sm leading-7 text-slate-300">{tagline}</p>
       </div>
-      <p className="max-w-3xl pl-16 text-sm leading-7 text-slate-300">{tagline}</p>
+      <div className="mt-6 flex items-center justify-between text-sm text-[#9bc2ff]">
+        <span>Ver tendencia</span>
+        <span className="transition group-hover:translate-x-1">→</span>
+      </div>
     </a>
   );
 }
@@ -151,43 +152,20 @@ export default function Home() {
           </div>
         </header>
 
-        <section className="grid gap-12 border-b border-white/10 py-14 lg:grid-cols-[0.42fr_1fr]">
+        <section className="grid gap-10 border-b border-white/10 py-14 lg:grid-cols-[0.34fr_1fr] lg:items-start">
           <div className="space-y-4">
             <SectionLabel>Tendencias</SectionLabel>
             <h2 className="text-3xl font-semibold tracking-[-0.03em] text-white">
               Lo que está caliente ahora
             </h2>
             <p className="max-w-sm text-sm leading-7 text-slate-400">
-              Esta franja luego se refrescará cada día a las 6:00 AM hora Santo Domingo con un cron real.
+              Esta selección luego se refrescará cada día a las 6:00 AM hora Santo Domingo con una investigación real y múltiples fuentes.
             </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-2">
             {trendingProducts.map((product) => (
-              <div key={product.id} className="border-t border-white/10 pt-4">
-                <TrendingRow {...product} />
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="grid gap-14 py-14 lg:grid-cols-[0.42fr_1fr]">
-          <div className="space-y-4">
-            <SectionLabel>Roadmap</SectionLabel>
-            <h2 className="text-3xl font-semibold tracking-[-0.03em] text-white">
-              Features futuros
-            </h2>
-            <p className="max-w-sm text-sm leading-7 text-slate-400">
-              La prioridad ahora es pulir identidad visual, búsqueda y estructura para que Karibean AI empiece a sentirse como producto real.
-            </p>
-          </div>
-
-          <div className="grid gap-x-8 gap-y-4 md:grid-cols-2">
-            {futureRoadmap.map((item, index) => (
-              <div key={item} className="flex gap-4 border-b border-white/8 pb-4">
-                <span className="text-sm font-medium text-[#8eb6ff]">{String(index + 1).padStart(2, "0")}</span>
-                <p className="text-sm leading-7 text-slate-300">{item}</p>
-              </div>
+              <TrendingCard key={product.id} {...product} />
             ))}
           </div>
         </section>
@@ -217,6 +195,27 @@ export default function Home() {
               </div>
             </div>
           ))}
+        </section>
+
+        <section className="grid gap-14 border-t border-white/10 py-14 lg:grid-cols-[0.42fr_1fr]">
+          <div className="space-y-4">
+            <SectionLabel>Roadmap</SectionLabel>
+            <h2 className="text-3xl font-semibold tracking-[-0.03em] text-white">
+              Features futuros
+            </h2>
+            <p className="max-w-sm text-sm leading-7 text-slate-400">
+              Lo próximo aquí es convertir esta vitrina en producto: identidad visual, búsqueda, favoritos y un sistema real de actualización diaria.
+            </p>
+          </div>
+
+          <div className="grid gap-x-8 gap-y-4 md:grid-cols-2">
+            {futureRoadmap.map((item, index) => (
+              <div key={item} className="flex gap-4 border-b border-white/8 pb-4">
+                <span className="text-sm font-medium text-[#8eb6ff]">{String(index + 1).padStart(2, "0")}</span>
+                <p className="text-sm leading-7 text-slate-300">{item}</p>
+              </div>
+            ))}
+          </div>
         </section>
       </div>
     </main>
