@@ -85,7 +85,7 @@ export default function Home() {
               <div className="flex flex-wrap gap-3 text-sm text-slate-300">
                 <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2">Max 4 productos por categoría</span>
                 <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2">Al menos 1 gratis y 1 pago</span>
-                <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2">Preparado para trending diario</span>
+                <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2">Preparado para búsqueda, favoritos y refresh diario</span>
               </div>
             </div>
 
@@ -107,7 +107,7 @@ export default function Home() {
           <div className="mb-5 flex items-end justify-between gap-4">
             <div>
               <p className="text-sm font-medium uppercase tracking-[0.24em] text-cyan-200">Trending</p>
-              <h2 className="mt-2 text-2xl font-semibold">4 productos calientes del momento</h2>
+              <h2 className="mt-2 text-2xl font-semibold">Trending del momento</h2>
             </div>
             <p className="text-sm text-slate-400">Future cron: 6:00 AM America/Santo_Domingo</p>
           </div>
