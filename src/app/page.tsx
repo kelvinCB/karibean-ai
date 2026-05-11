@@ -2,21 +2,29 @@ import { categories, futureRoadmap, trendingProducts } from "@/data/marketplace"
 
 function Badge({ label }: { label: string }) {
   const styles: Record<string, string> = {
-    Free: "bg-emerald-500/15 text-emerald-300 ring-emerald-400/30",
-    Freemium: "bg-sky-500/15 text-sky-300 ring-sky-400/30",
-    Paid: "bg-amber-500/15 text-amber-200 ring-amber-300/30",
+    Gratis: "bg-emerald-500/12 text-emerald-200 ring-emerald-500/20",
+    Freemium: "bg-cyan-500/12 text-cyan-100 ring-cyan-500/20",
+    Pago: "bg-amber-500/12 text-amber-100 ring-amber-500/20",
   };
 
   return (
     <span
-      className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold ring-1 ${styles[label] ?? "bg-white/10 text-white ring-white/15"}`}
+      className={`inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-medium uppercase tracking-[0.18em] ring-1 ${styles[label]}`}
     >
       {label}
     </span>
   );
 }
 
-function ProductCard({
+function SectionLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#8eb6ff]">
+      {children}
+    </p>
+  );
+}
+
+function ProductRow({
   name,
   tagline,
   url,
@@ -36,107 +44,130 @@ function ProductCard({
       href={url}
       target="_blank"
       rel="noreferrer"
-      className="group flex h-full flex-col justify-between rounded-3xl border border-white/10 bg-white/5 p-5 transition hover:-translate-y-1 hover:border-cyan-300/40 hover:bg-white/8"
+      className="group grid gap-4 border-b border-white/8 py-5 transition first:pt-0 last:border-b-0 last:pb-0 hover:bg-white/[0.02]"
     >
-      <div className="space-y-4">
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <img
-              src={logo}
-              alt={`${name} logo`}
-              className="h-12 w-12 rounded-2xl bg-white/90 p-2 object-contain"
-            />
-            <div>
-              <h3 className="text-base font-semibold text-white">{name}</h3>
-              <p className="text-sm text-slate-400">{bestFor}</p>
-            </div>
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex items-start gap-4">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/90 shadow-sm shadow-black/10">
+            <img src={logo} alt={`${name} logo`} className="h-7 w-7 object-contain" />
           </div>
-          <Badge label={pricing} />
+          <div className="space-y-1">
+            <div className="flex flex-wrap items-center gap-3">
+              <h3 className="text-lg font-medium text-white">{name}</h3>
+              <Badge label={pricing} />
+            </div>
+            <p className="text-sm text-slate-400">{bestFor}</p>
+          </div>
         </div>
-        <p className="text-sm leading-6 text-slate-300">{tagline}</p>
+        <span className="hidden text-sm text-[#9bc2ff] transition group-hover:translate-x-1 sm:inline">
+          Visitar →
+        </span>
       </div>
-
-      <div className="mt-6 flex items-center justify-between text-sm text-cyan-200">
-        <span>Visit site</span>
-        <span className="transition group-hover:translate-x-1">→</span>
-      </div>
+      <p className="max-w-3xl pl-16 text-sm leading-7 text-slate-300">{tagline}</p>
     </a>
   );
 }
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_#10304a,_#050816_55%)] text-white">
-      <div className="mx-auto max-w-7xl px-6 py-10 sm:px-8 lg:px-10">
-        <section className="overflow-hidden rounded-[2rem] border border-cyan-400/20 bg-white/5 p-8 shadow-2xl shadow-cyan-950/30 backdrop-blur md:p-10">
-          <div className="grid gap-10 lg:grid-cols-[1.4fr_0.9fr] lg:items-end">
-            <div className="space-y-6">
-              <div className="inline-flex rounded-full border border-cyan-300/20 bg-cyan-400/10 px-4 py-1 text-sm font-medium text-cyan-200">
-                Karibean AI
-              </div>
-              <div className="space-y-4">
-                <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-                  Un marketplace curado para descubrir los productos de IA que de verdad la están rompiendo.
+    <main className="min-h-screen bg-[#06111f] text-white">
+      <div className="mx-auto max-w-7xl px-6 py-10 sm:px-8 lg:px-12">
+        <header className="border-b border-white/10 pb-16">
+          <div className="grid gap-14 lg:grid-cols-[1.4fr_0.7fr] lg:items-end">
+            <div className="space-y-8">
+              <SectionLabel>Karibean AI</SectionLabel>
+              <div className="space-y-5">
+                <h1 className="max-w-4xl text-4xl font-semibold leading-tight tracking-[-0.04em] text-white sm:text-6xl">
+                  Un índice curado para encontrar productos de IA que sí están moviendo el mercado.
                 </h1>
-                <p className="max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">
-                  Explora herramientas top por categoría, mezcla sana entre gratis y pago, y una franja trending pensada para refrescarse cada día.
+                <p className="max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
+                  Karibean AI organiza herramientas por categoría, evita el ruido y te deja una selección compacta de productos útiles, conocidos o emergentes, con mezcla entre gratis, freemium y pago.
                 </p>
               </div>
-              <div className="flex flex-wrap gap-3 text-sm text-slate-300">
-                <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2">Max 4 productos por categoría</span>
-                <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2">Al menos 1 gratis y 1 pago</span>
-                <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2">Preparado para trending diario</span>
+            </div>
+
+            <div className="space-y-6 lg:pl-8">
+              <div className="border-l border-[#2a4a73] pl-5">
+                <p className="text-sm leading-7 text-slate-300">
+                  Esto no quiere parecer un dashboard de plantilla. La idea es que se sienta como un marketplace editorial, más curado, más limpio y menos “AI-made”.
+                </p>
+              </div>
+              <div className="grid grid-cols-2 gap-4 text-sm text-slate-300">
+                <div>
+                  <p className="text-2xl font-semibold text-white">4</p>
+                  <p className="mt-1 leading-6">productos máximo por categoría</p>
+                </div>
+                <div>
+                  <p className="text-2xl font-semibold text-white">1+1</p>
+                  <p className="mt-1 leading-6">al menos un gratis y un pago</p>
+                </div>
               </div>
             </div>
-
-            <div className="rounded-[1.75rem] border border-white/10 bg-slate-950/60 p-6">
-              <p className="text-sm font-medium uppercase tracking-[0.24em] text-cyan-200">Roadmap del producto</p>
-              <ul className="mt-4 space-y-3 text-sm text-slate-300">
-                {futureRoadmap.map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <span className="mt-1 inline-block h-2.5 w-2.5 rounded-full bg-cyan-300" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
           </div>
-        </section>
+        </header>
 
-        <section className="mt-10">
-          <div className="mb-5 flex items-end justify-between gap-4">
-            <div>
-              <p className="text-sm font-medium uppercase tracking-[0.24em] text-cyan-200">Trending</p>
-              <h2 className="mt-2 text-2xl font-semibold">4 productos calientes del momento</h2>
-            </div>
-            <p className="text-sm text-slate-400">Future cron: 6:00 AM America/Santo_Domingo</p>
+        <section className="grid gap-12 border-b border-white/10 py-14 lg:grid-cols-[0.42fr_1fr]">
+          <div className="space-y-4">
+            <SectionLabel>Tendencias</SectionLabel>
+            <h2 className="text-3xl font-semibold tracking-[-0.03em] text-white">
+              Lo que está caliente ahora
+            </h2>
+            <p className="max-w-sm text-sm leading-7 text-slate-400">
+              Esta franja luego se refrescará cada día a las 6:00 AM hora Santo Domingo con un cron real.
+            </p>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          <div className="grid gap-6 md:grid-cols-2">
             {trendingProducts.map((product) => (
-              <ProductCard key={product.id} {...product} />
+              <div key={product.id} className="border-t border-white/10 pt-4">
+                <ProductRow {...product} />
+              </div>
             ))}
           </div>
         </section>
 
-        <section className="mt-14 space-y-8">
+        <section className="grid gap-14 py-14 lg:grid-cols-[0.42fr_1fr]">
+          <div className="space-y-4">
+            <SectionLabel>Roadmap</SectionLabel>
+            <h2 className="text-3xl font-semibold tracking-[-0.03em] text-white">
+              Features futuros
+            </h2>
+            <p className="max-w-sm text-sm leading-7 text-slate-400">
+              La prioridad ahora es pulir identidad visual, búsqueda y estructura para que Karibean AI empiece a sentirse como producto real.
+            </p>
+          </div>
+
+          <div className="grid gap-x-8 gap-y-4 md:grid-cols-2">
+            {futureRoadmap.map((item, index) => (
+              <div key={item} className="flex gap-4 border-b border-white/8 pb-4">
+                <span className="text-sm font-medium text-[#8eb6ff]">{String(index + 1).padStart(2, "0")}</span>
+                <p className="text-sm leading-7 text-slate-300">{item}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="space-y-16 border-t border-white/10 pt-14">
           {categories.map((category) => (
-            <div key={category.id} className="space-y-4">
-              <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
-                <div>
-                  <h2 className="text-2xl font-semibold text-white">{category.name}</h2>
-                  <p className="mt-1 max-w-3xl text-sm leading-6 text-slate-400">{category.description}</p>
-                </div>
+            <div key={category.id} className="grid gap-10 lg:grid-cols-[0.42fr_1fr]">
+              <div className="space-y-4">
+                <SectionLabel>{category.name}</SectionLabel>
+                <h2 className="text-3xl font-semibold tracking-[-0.03em] text-white">
+                  {category.name}
+                </h2>
+                <p className="max-w-sm text-sm leading-7 text-slate-400">
+                  {category.description}
+                </p>
                 {category.futureFeatures?.length ? (
-                  <p className="text-xs uppercase tracking-[0.2em] text-slate-500">
+                  <div className="pt-2 text-xs uppercase tracking-[0.16em] text-slate-500">
                     Futuro: {category.futureFeatures.join(" · ")}
-                  </p>
+                  </div>
                 ) : null}
               </div>
 
-              <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+              <div>
                 {category.products.map((product) => (
-                  <ProductCard key={product.id} {...product} />
+                  <ProductRow key={product.id} {...product} />
                 ))}
               </div>
             </div>
