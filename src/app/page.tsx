@@ -24,51 +24,6 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-function TrendingCard({
-  name,
-  tagline,
-  url,
-  logo,
-  pricing,
-  bestFor,
-}: {
-  name: string;
-  tagline: string;
-  url: string;
-  logo: string;
-  pricing: string;
-  bestFor: string;
-}) {
-  return (
-    <a
-      href={url}
-      target="_blank"
-      rel="noreferrer"
-      className="group flex h-full flex-col justify-between rounded-[1.6rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] p-5 transition duration-200 hover:-translate-y-1 hover:border-[#8eb6ff]/40 hover:bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))]"
-    >
-      <div className="space-y-5">
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/90 shadow-sm shadow-black/10">
-              <img src={logo} alt={`${name} logo`} className="h-7 w-7 object-contain" />
-            </div>
-            <div>
-              <h3 className="text-base font-semibold text-white">{name}</h3>
-              <p className="text-sm text-slate-400">{bestFor}</p>
-            </div>
-          </div>
-          <Badge label={pricing} />
-        </div>
-        <p className="text-sm leading-7 text-slate-300">{tagline}</p>
-      </div>
-      <div className="mt-6 flex items-center justify-between text-sm text-[#9bc2ff]">
-        <span>Ver tendencia</span>
-        <span className="transition group-hover:translate-x-1">→</span>
-      </div>
-    </a>
-  );
-}
-
 function ProductCard({
   name,
   tagline,
@@ -76,6 +31,7 @@ function ProductCard({
   logo,
   pricing,
   bestFor,
+  actionLabel = "Explorar producto",
 }: {
   name: string;
   tagline: string;
@@ -83,6 +39,7 @@ function ProductCard({
   logo: string;
   pricing: string;
   bestFor: string;
+  actionLabel?: string;
 }) {
   return (
     <a
@@ -107,10 +64,40 @@ function ProductCard({
         <p className="text-sm leading-7 text-slate-300">{tagline}</p>
       </div>
       <div className="mt-6 flex items-center justify-between text-sm text-[#9bc2ff]">
-        <span>Explorar producto</span>
+        <span>{actionLabel}</span>
         <span className="transition group-hover:translate-x-1">→</span>
       </div>
     </a>
+  );
+}
+
+function SectionBlock({
+  eyebrow,
+  title,
+  description,
+  children,
+  footer,
+}: {
+  eyebrow: string;
+  title: string;
+  description: string;
+  children: React.ReactNode;
+  footer?: React.ReactNode;
+}) {
+  return (
+    <section className="space-y-8 border-t border-white/10 pt-14">
+      <div className="space-y-4">
+        <SectionLabel>{eyebrow}</SectionLabel>
+        <h2 className="max-w-3xl text-3xl font-semibold tracking-[-0.03em] text-white sm:text-4xl">
+          {title}
+        </h2>
+        <p className="max-w-3xl text-sm leading-7 text-slate-400 sm:text-base">
+          {description}
+        </p>
+        {footer}
+      </div>
+      {children}
+    </section>
   );
 }
 
@@ -152,62 +139,45 @@ export default function Home() {
           </div>
         </header>
 
-        <section className="grid gap-10 border-b border-white/10 py-14 lg:grid-cols-[0.34fr_1fr] lg:items-start">
-          <div className="space-y-4">
-            <SectionLabel>Tendencias</SectionLabel>
-            <h2 className="text-3xl font-semibold tracking-[-0.03em] text-white">
-              Lo que está caliente ahora
-            </h2>
-            <p className="max-w-sm text-sm leading-7 text-slate-400">
-              Esta selección luego se refrescará cada día a las 6:00 AM hora Santo Domingo con una investigación real y múltiples fuentes.
-            </p>
-          </div>
-
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-2">
+        <SectionBlock
+          eyebrow="Tendencias"
+          title="Lo que está caliente ahora"
+          description="Esta selección luego se refrescará cada día a las 6:00 AM hora Santo Domingo con una investigación real y múltiples fuentes."
+        >
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {trendingProducts.map((product) => (
-              <TrendingCard key={product.id} {...product} />
+              <ProductCard key={product.id} {...product} actionLabel="Ver tendencia" />
             ))}
           </div>
-        </section>
+        </SectionBlock>
 
-        <section className="space-y-16 border-t border-white/10 pt-14">
-          {categories.map((category) => (
-            <div key={category.id} className="grid gap-10 lg:grid-cols-[0.42fr_1fr]">
-              <div className="space-y-4">
-                <SectionLabel>{category.name}</SectionLabel>
-                <h2 className="text-3xl font-semibold tracking-[-0.03em] text-white">
-                  {category.name}
-                </h2>
-                <p className="max-w-sm text-sm leading-7 text-slate-400">
-                  {category.description}
-                </p>
-                {category.futureFeatures?.length ? (
-                  <div className="pt-2 text-xs uppercase tracking-[0.16em] text-slate-500">
-                    Futuro: {category.futureFeatures.join(" · ")}
-                  </div>
-                ) : null}
-              </div>
-
-              <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-2">
-                {category.products.map((product) => (
-                  <ProductCard key={product.id} {...product} />
-                ))}
-              </div>
+        {categories.map((category) => (
+          <SectionBlock
+            key={category.id}
+            eyebrow={category.name}
+            title={category.name}
+            description={category.description}
+            footer={
+              category.futureFeatures?.length ? (
+                <div className="pt-1 text-xs uppercase tracking-[0.16em] text-slate-500">
+                  Futuro: {category.futureFeatures.join(" · ")}
+                </div>
+              ) : undefined
+            }
+          >
+            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+              {category.products.map((product) => (
+                <ProductCard key={product.id} {...product} />
+              ))}
             </div>
-          ))}
-        </section>
+          </SectionBlock>
+        ))}
 
-        <section className="grid gap-14 border-t border-white/10 py-14 lg:grid-cols-[0.42fr_1fr]">
-          <div className="space-y-4">
-            <SectionLabel>Roadmap</SectionLabel>
-            <h2 className="text-3xl font-semibold tracking-[-0.03em] text-white">
-              Features futuros
-            </h2>
-            <p className="max-w-sm text-sm leading-7 text-slate-400">
-              Lo próximo aquí es convertir esta vitrina en producto: identidad visual, búsqueda, favoritos y un sistema real de actualización diaria.
-            </p>
-          </div>
-
+        <SectionBlock
+          eyebrow="Roadmap"
+          title="Features futuros"
+          description="Lo próximo aquí es convertir esta vitrina en producto: identidad visual, búsqueda, favoritos y un sistema real de actualización diaria."
+        >
           <div className="grid gap-x-8 gap-y-4 md:grid-cols-2">
             {futureRoadmap.map((item, index) => (
               <div key={item} className="flex gap-4 border-b border-white/8 pb-4">
@@ -216,7 +186,7 @@ export default function Home() {
               </div>
             ))}
           </div>
-        </section>
+        </SectionBlock>
       </div>
     </main>
   );
