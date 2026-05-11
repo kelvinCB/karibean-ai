@@ -61,3 +61,11 @@ Then open http://localhost:3000
 ## Notes
 
 This MVP uses static curated data in `src/data/marketplace.ts` so the repo is easy to clone, inspect, and iterate on.
+
+
+## Curation rules
+
+- Maximum 4 products per category
+- At least one free product per category
+- At least one paid product per category
+- Prefer products with strong brand/product recognition
