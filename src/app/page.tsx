@@ -1,4 +1,9 @@
+import * as React from "react";
 import { categories, futureRoadmap, trendingProducts } from "@/data/marketplace";
+
+function normalizeText(value: string) {
+  return value.toLowerCase();
+}
 
 function Badge({ label }: { label: string }) {
   const styles: Record<string, string> = {
@@ -102,10 +107,38 @@ function SectionBlock({
 }
 
 export default function Home() {
+  const [query, setQuery] = React.useState("");
+
+  const filteredTrending = trendingProducts.filter((product) =>
+    normalizeText(`${product.name} ${product.tagline} ${product.bestFor} ${product.category}`).includes(normalizeText(query)),
+  );
+
+  const filteredCategories = categories
+    .map((category) => ({
+      ...category,
+      products: category.products.filter((product) =>
+        normalizeText(`${category.name} ${category.description} ${product.name} ${product.tagline} ${product.bestFor}`).includes(normalizeText(query)),
+      ),
+    }))
+    .filter((category) => !query || category.products.length > 0 || normalizeText(`${category.name} ${category.description}`).includes(normalizeText(query)));
+
   return (
     <main className="min-h-screen bg-[#06111f] text-white">
       <div className="mx-auto max-w-7xl px-6 py-10 sm:px-8 lg:px-12">
         <header className="border-b border-white/10 pb-16">
+          <div className="mb-10 rounded-[1.6rem] border border-white/10 bg-white/5 p-4 sm:p-5">
+            <label htmlFor="search" className="mb-3 block text-xs font-semibold uppercase tracking-[0.22em] text-[#8eb6ff]">
+              Buscar en Karibean AI
+            </label>
+            <input
+              id="search"
+              type="text"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Busca productos, categorías o usos recomendados..."
+              className="w-full rounded-2xl border border-white/10 bg-[#081624] px-4 py-3 text-sm text-white outline-none placeholder:text-slate-500 focus:border-[#8eb6ff]/50"
+            />
+          </div>
           <div className="grid gap-14 lg:grid-cols-[1.4fr_0.7fr] lg:items-end">
             <div className="space-y-8">
               <SectionLabel>Karibean AI</SectionLabel>
@@ -145,13 +178,13 @@ export default function Home() {
           description="Esta selección luego se refrescará cada día a las 6:00 AM hora Santo Domingo con una investigación real y múltiples fuentes."
         >
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {trendingProducts.map((product) => (
+            {filteredTrending.map((product) => (
               <ProductCard key={product.id} {...product} actionLabel="Ver tendencia" />
             ))}
           </div>
         </SectionBlock>
 
-        {categories.map((category) => (
+        {filteredCategories.map((category) => (
           <SectionBlock
             key={category.id}
             eyebrow={category.name}
