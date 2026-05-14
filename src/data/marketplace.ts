@@ -352,15 +352,16 @@ export const categories: Category[] = [
 ];
 
 export const futureRoadmap = [
-  "Buscar productos",
-  "Buscar categorías",
-  "Guardar favoritos",
-  "Actualizar Trending todos los días a las 6:00 AM, hora Santo Domingo",
-  "Modal o vista detalle de producto",
-  "Flujo para sugerir nuevas tools",
-  "Buscar por workflow en automatización y agentes",
-  "Colecciones guardadas de productos",
-  "Comparar tools o stacks parecidos",
-  "Quitar rastros visuales y logos heredados de Next.js",
-  "Crear identidad visual propia para Karibean AI",
+  'Buscar productos',
+  'Buscar categorías',
+  'Guardar favoritos',
+  'Actualizar Trending todos los días a las 6:00 AM, hora Santo Domingo',
+  'Modal o vista detalle de producto',
+  'Flujo para sugerir nuevas tools',
+  'Buscar por workflow en automatización y agentes',
+  'Colecciones guardadas de productos',
+  'Comparar tools o stacks parecidos',
+  'Quitar rastros visuales y logos heredados de Next.js',
+  'Crear identidad visual propia para Karibean AI',
+  'Revisión curada automática (2026-05-14)',
 ];
