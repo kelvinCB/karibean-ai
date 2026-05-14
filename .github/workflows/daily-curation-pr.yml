@@ -1,0 +1,35 @@
+name: Daily curation PR
+
+on:
+  schedule:
+    - cron: '0 10 * * *' # 6:00 AM America/Santo_Domingo
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  daily-curation-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Refresh curation metadata
+        run: node scripts/refresh-roadmap.mjs
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: 'chore: refresh daily curation metadata'
+          title: 'chore: refresh daily curation metadata'
+          body: |
+            Actualiza metadata curada diaria del marketplace para mantener movimiento visible en el repo.
+          branch: chore/refresh-daily-curation
+          delete-branch: true
