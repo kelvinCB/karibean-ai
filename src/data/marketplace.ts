@@ -22,45 +22,45 @@ export type Category = {
 
 export const trendingProducts: Product[] = [
   {
-    id: "cursor",
-    name: "Cursor",
-    tagline: "Editor AI-first para programar y entregar más rápido.",
-    url: "https://www.cursor.com/",
-    logo: "https://www.google.com/s2/favicons?domain=cursor.com&sz=128",
-    pricing: "Freemium",
-    category: "Tendencias",
-    bestFor: "Productividad de desarrollo",
+    id: 'cursor',
+    name: 'Cursor',
+    tagline: 'Editor AI-first para programar y entregar más rápido.',
+    url: 'https://www.cursor.com/',
+    logo: 'https://www.google.com/s2/favicons?domain=cursor.com&sz=128',
+    pricing: 'Freemium',
+    category: 'Tendencias',
+    bestFor: 'Productividad de desarrollo'
   },
   {
-    id: "gamma",
-    name: "Gamma",
-    tagline: "Presentaciones y documentos visuales creados en minutos.",
-    url: "https://gamma.app/",
-    logo: "https://www.google.com/s2/favicons?domain=gamma.app&sz=128",
-    pricing: "Freemium",
-    category: "Tendencias",
-    bestFor: "Presentaciones rápidas",
+    id: 'claude',
+    name: 'Claude',
+    tagline: 'Asistente fuerte para razonamiento, documentos largos y writing de alta calidad.',
+    url: 'https://claude.ai/',
+    logo: 'https://www.google.com/s2/favicons?domain=claude.ai&sz=128',
+    pricing: 'Freemium',
+    category: 'Tendencias',
+    bestFor: 'Investigación y análisis'
   },
   {
-    id: "runway",
-    name: "Runway",
-    tagline: "Generación y edición de video con workflows creativos modernos.",
-    url: "https://runwayml.com/",
-    logo: "https://www.google.com/s2/favicons?domain=runwayml.com&sz=128",
-    pricing: "Pago",
-    category: "Tendencias",
-    bestFor: "Video con IA",
+    id: 'openclaw',
+    name: 'OpenClaw',
+    tagline: 'Agentes AI que planifican, deciden y ejecutan tareas sobre herramientas reales.',
+    url: 'https://openclaw.ai/',
+    logo: 'https://www.google.com/s2/favicons?domain=openclaw.ai&sz=128',
+    pricing: 'Gratis',
+    category: 'Tendencias',
+    bestFor: 'Automatización y agentes'
   },
   {
-    id: "lovable",
-    name: "Lovable",
-    tagline: "Convierte prompts en interfaces y productos funcionales.",
-    url: "https://lovable.dev/",
-    logo: "https://www.google.com/s2/favicons?domain=lovable.dev&sz=128",
-    pricing: "Freemium",
-    category: "Tendencias",
-    bestFor: "Prototipado de productos",
-  },
+    id: 'lovable',
+    name: 'Lovable',
+    tagline: 'Convierte prompts en interfaces y productos funcionales con velocidad brutal.',
+    url: 'https://lovable.dev/',
+    logo: 'https://www.google.com/s2/favicons?domain=lovable.dev&sz=128',
+    pricing: 'Freemium',
+    category: 'Tendencias',
+    bestFor: 'Prototipado de productos'
+  }
 ];
 
 export const categories: Category[] = [
