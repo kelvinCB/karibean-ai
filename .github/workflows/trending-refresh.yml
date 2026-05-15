@@ -1,0 +1,35 @@
+name: Refresh trending daily
+
+on:
+  schedule:
+    - cron: '0 10 * * *' # 6:00 AM America/Santo_Domingo (UTC-4)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh-trending:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Refresh trending data
+        run: node scripts/refresh-trending.mjs
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: 'chore: refresh trending products'
+          title: 'chore: refresh trending products'
+          body: |
+            Actualiza la selección de Trending programada para las 6:00 AM hora Santo Domingo.
+          branch: chore/refresh-trending-daily
+          delete-branch: true

@@ -14,7 +14,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Karibean AI",
-  description: "Curated AI products marketplace dashboard with trending tools and category-based discovery.",
+  description:
+    "Marketplace curado para descubrir productos de inteligencia artificial por categoría y tendencias.",
 };
 
 export default function RootLayout({
@@ -24,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="es"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>

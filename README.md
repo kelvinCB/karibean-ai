@@ -1,64 +1,68 @@
 # Karibean AI
 
-Karibean AI is a curated AI products marketplace dashboard focused on surfacing the tools that are actually winning across key categories.
+Karibean AI es un marketplace curado de productos de inteligencia artificial, pensado para descubrir herramientas que realmente están empujando el mercado en categorías específicas.
 
-## MVP Scope
+## Alcance del MVP
 
-- Hero section with product positioning
-- Trending section with 4 daily-highlighted AI tools
-- Curated categories with a maximum of 4 products each
-- Every category includes a pricing mix with at least one free product and one paid product
-- Each product card includes:
-  - name
+- Hero principal con posicionamiento del producto
+- Sección Trending con 4 productos destacados del día
+- Categorías curadas con un máximo de 4 productos cada una
+- Cada categoría con mezcla de pricing, incluyendo al menos un producto gratis y uno pago
+- Cada producto muestra:
+  - nombre
   - logo
   - URL
   - tagline
-  - pricing badge
-  - best-for summary
+  - badge de pricing
+  - uso recomendado
 
-## Categories in this MVP
+## Categorías incluidas en este MVP
 
 - Trending
-- Presentation AI
-- AI IDEs
-- Image Generators
-- Video Generators
-- Marketing AI
-- Automation & Agents
+- IA para Presentaciones
+- IDEs con IA
+- Generadores de Imágenes
+- Generadores de Video
+- IA para Marketing
+- Automatización y Agentes
 
-## Tech Stack
+## Stack tecnológico
 
 - Next.js
 - TypeScript
 - Tailwind CSS
 
-## Run locally
+## Correr localmente
 
 ```bash
 npm install
 npm run dev
 ```
 
-Then open http://localhost:3000
+Luego abre http://localhost:3000
 
-## Future roadmap
+## Features futuros
 
-- Search products
-- Search categories
-- Save favorites
-- Product detail modal
-- Submit a tool flow
-- Automated daily trending refresh at 6:00 AM America/Santo_Domingo
+- Buscar productos
+- Buscar categorías
+- Guardar favoritos
+- Vista detalle o modal por producto
+- Flujo para sugerir nuevas tools
+- Buscar por workflow
+- Colecciones guardadas
+- Comparación entre tools o stacks
+- Remover residuos visuales de Next.js
+- Crear identidad visual propia para Karibean AI
+- Refresh automático de Trending a las 6:00 AM hora Santo Domingo
 
-## Suggested Git workflow
+## Reglas de curación
 
-- `main` protected
-- all changes via pull request
-- no direct pushes to main
-- one PR for docs/data
-- one PR for feature/UI
+- Máximo 4 productos por categoría
+- Al menos un producto gratis por categoría
+- Al menos un producto pago por categoría
+- Priorizar productos con reconocimiento, utilidad o momentum real
 
-## Notes
+## Nota
 
 This MVP uses static curated data in `src/data/marketplace.ts` so the repo is easy to clone, inspect, and iterate on.
 
