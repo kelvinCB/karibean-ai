@@ -150,24 +150,23 @@ export default function Home() {
                   Karibean AI organiza herramientas por categoría, evita el ruido y te deja una selección compacta de productos útiles, conocidos o emergentes, con mezcla entre gratis, freemium y pago.
                 </p>
               </div>
+              <div className="flex flex-wrap gap-3 text-sm text-slate-300">
+                <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2">Max 4 productos por categoría</span>
+                <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2">Al menos 1 gratis y 1 pago</span>
+                <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2">Preparado para búsqueda, favoritos y refresh diario</span>
+              </div>
             </div>
 
-            <div className="space-y-6 lg:pl-8">
-              <div className="border-l border-[#2a4a73] pl-5">
-                <p className="text-sm leading-7 text-slate-300">
-                  El objetivo no es parecer otro dashboard genérico de IA, sino una vitrina curada, clara y con suficiente personalidad para que navegar categorías se sienta útil.
-                </p>
-              </div>
-              <div className="grid grid-cols-2 gap-4 text-sm text-slate-300">
-                <div>
-                  <p className="text-2xl font-semibold text-white">4</p>
-                  <p className="mt-1 leading-6">productos máximo por categoría</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-semibold text-white">1+1</p>
-                  <p className="mt-1 leading-6">al menos un gratis y un pago</p>
-                </div>
-              </div>
+            <div className="rounded-[1.75rem] border border-white/10 bg-slate-950/60 p-6">
+              <p className="text-sm font-medium uppercase tracking-[0.24em] text-cyan-200">Roadmap del producto</p>
+              <ul className="mt-4 space-y-3 text-sm text-slate-300">
+                {futureRoadmap.map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <span className="mt-1 inline-block h-2.5 w-2.5 rounded-full bg-cyan-300" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </header>
@@ -176,6 +175,7 @@ export default function Home() {
           eyebrow="Tendencias"
           title="Lo que está caliente ahora"
           description="Esta selección luego se refrescará cada día a las 6:00 AM hora Santo Domingo con una investigación real y múltiples fuentes."
+          footer={<div className="pt-1 text-xs uppercase tracking-[0.16em] text-slate-500">Future cron: 6:00 AM America/Santo_Domingo</div>}
         >
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {filteredTrending.map((product) => (
