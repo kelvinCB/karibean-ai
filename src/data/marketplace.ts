@@ -363,5 +363,5 @@ export const futureRoadmap = [
   'Comparar tools o stacks parecidos',
   'Quitar rastros visuales y logos heredados de Next.js',
   'Crear identidad visual propia para Karibean AI',
-  'Revisión curada automática (2026-05-14)',
+  'Revisión curada automática (2026-05-15)',
 ];
